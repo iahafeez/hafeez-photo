@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Hafeez Photo</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="top-bar">
+    <div class="top-bar__inner container">
+      <div class="top-bar__social">
+        <a href="https://www.instagram.com/hafeezphoto" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/hafeez-photo/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        </a>
+      </div>
+      <div class="top-bar__info">
+        <span class="top-bar__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <span>ibrahim@hafeezphoto.com</span>
+        </span>
+        <span class="top-bar__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <span>Southern California</span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="main-nav">
+    <div class="main-nav__inner container">
+      <a href="index.html" class="main-nav__brand">
+        <span class="main-nav__logo">Hafeez Photo</span>
+        <span class="section-label section-label--navy">Corporate Event &amp; Headshot Photography</span>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-dropdown">
+          <a href="expos.html" class="nav-link">Corporate Events</a>
+          <button class="nav-dropdown-toggle" type="button" aria-label="Toggle Corporate Events submenu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="nav-dropdown-menu">
+            <ul class="nav-dropdown-panel">
+              <li><a href="expos.html">Expos &amp; Trade Shows</a></li>
+              <li><a href="conferences.html">Conferences</a></li>
+              <li><a href="private-events.html">Private Events</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="headshots.html" class="nav-link">Headshots</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="blog.html" class="nav-link">Blog</a></li>
+      </ul>
+
+      <div class="main-nav__actions">
+        <a href="contact.html" class="btn-contact">Contact &rarr;</a>
+        <button class="hamburger" type="button" aria-label="Open menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="about-hero">
+    <div class="container about-hero__inner">
+      <div class="about-photo">
+        <!-- expects images/about/ibrahim-headshot.jpg -->
+        <img src="images/about/ibrahim-headshot.jpg" alt="Ibrahim Abdelhafeez, corporate event and headshot photographer" class="placeholder-photo" onerror="this.style.display='none'">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="about-photo-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+      </div>
+
+      <div class="about-content">
+        <span class="section-label">About</span>
+        <h1 class="about-title">Ibrahim Abdelhafeez</h1>
+        <p class="about-subtitle">Corporate Event &amp; Headshot Photographer</p>
+
+        <p class="about-bio">With over 15 years of photography experience spanning weddings, engagements, family, and commercial work, I made the shift in 2025 to focus on what I love most, capturing the energy of corporate events and helping professionals put their best face forward with headshots that actually look like them, just more polished.</p>
+        <p class="about-bio">I&rsquo;ve had the opportunity to serve as official photographer for Winter FancyFaire in San Diego and Natural Products Expo West in Anaheim, covering 60+ exhibiting brands across both events. That experience shaped how I work: fast, unobtrusive, and always thinking about how the final images will actually be used, whether on a LinkedIn profile, in a recap deck, or in next year&rsquo;s sponsorship pitch.</p>
+        <p class="about-bio">Based in Southern California and available nationally, I bring a full on-site studio setup, same-day highlight delivery, and a genuinely calm presence to fast-moving event floors, because a great photographer should make your day easier, not add to the chaos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-cta">
+    <div class="container">
+      <span class="section-label">Work With Me</span>
+      <h2 class="contact-cta-title">Let&rsquo;s Tell Your Story</h2>
+      <p class="contact-cta-subtitle">Whether it&rsquo;s a trade show floor, a conference stage, or a private celebration, let&rsquo;s create images your brand will be proud of.</p>
+      <a href="contact.html" class="btn-cta">Get in Touch &rarr;</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <span class="site-footer__brand">Hafeez Photo</span>
+
+      <ul class="site-footer__links">
+        <li><a href="https://www.instagram.com/hafeezphoto" class="nav-link" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+        <li><a href="https://www.linkedin.com/company/hafeez-photo/" class="nav-link" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+
+      <span class="site-footer__copyright">&copy; 2026 Hafeez Photo. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
