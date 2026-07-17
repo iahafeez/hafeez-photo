@@ -159,6 +159,7 @@ h6 {
   color: var(--color-off-white);
   font-family: var(--font-body);
   font-size: 12px;
+  text-decoration: none;
   white-space: nowrap;
 }
 
@@ -493,9 +494,19 @@ h6 {
 
   .top-bar__info {
     flex: 1 1 auto;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 8px 16px;
+    justify-content: flex-end;
+  }
+
+  /* Location doesn't do anything tappable on mobile, so it's dropped
+     entirely rather than kept as dead weight in the ribbon. */
+  .top-bar__item--location {
+    display: none;
+  }
+
+  /* The mail icon collapses to the actual email text (a real mailto: link)
+     instead, so there's no icon left to size here. */
+  .top-bar__item--email svg {
+    display: none;
   }
 
   .top-bar__social svg {
@@ -513,14 +524,6 @@ h6 {
   .container {
     padding-left: 16px;
     padding-right: 16px;
-  }
-
-  .top-bar__item span:last-child {
-    display: none;
-  }
-
-  .top-bar__item {
-    gap: 0;
   }
 
   .main-nav__logo {
