@@ -795,12 +795,12 @@ h6 {
 
 @media (max-width: 768px) {
   .services {
-    padding-top: 64px;
-    padding-bottom: 64px;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 
   .services-header {
-    margin-bottom: 40px;
+    margin-bottom: 28px;
   }
 
   .services-title {
