@@ -430,6 +430,15 @@ h6 {
     min-width: 0;
   }
 
+  /* Once wrapped onto its own row, .main-nav__actions is the sole flex item
+     on that line, so it hugs its content width and sits flush left — push it
+     to full width so space-between can pin Contact left and the hamburger
+     to the right edge instead of leaving them bunched together. */
+  .main-nav__actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
   .main-nav__actions .btn-contact {
     padding: 10px 18px;
     font-size: 11px;
@@ -476,15 +485,14 @@ h6 {
 @media (max-width: 768px) {
   .top-bar__inner {
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     gap: 8px 16px;
-    text-align: center;
   }
 
   .top-bar__info {
-    width: 100%;
+    flex: 1 1 auto;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     gap: 8px 16px;
   }
 }
