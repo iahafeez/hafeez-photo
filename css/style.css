@@ -487,6 +487,8 @@ h6 {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 8px 16px;
+    padding-top: 13px;
+    padding-bottom: 13px;
   }
 
   .top-bar__info {
@@ -495,11 +497,22 @@ h6 {
     justify-content: space-between;
     gap: 8px 16px;
   }
+
+  .top-bar__social svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .top-bar__item svg {
+    width: 16px;
+    height: 16px;
+  }
 }
 
 @media (max-width: 480px) {
   .container {
-    padding: 0 16px;
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .top-bar__item span:last-child {
