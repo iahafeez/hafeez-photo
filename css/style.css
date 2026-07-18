@@ -1247,6 +1247,55 @@ h6 {
 }
 
 /* --------------------------------------------------------------------------
+   Legal Content — Privacy Policy
+   -------------------------------------------------------------------------- */
+.legal-content {
+  width: 100%;
+  background: var(--color-white);
+  padding-top: 80px;
+  padding-bottom: 100px;
+}
+
+.legal-content-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.legal-updated {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #8a8a8a;
+  margin-bottom: 32px;
+}
+
+.legal-heading {
+  font-size: 24px;
+  color: var(--color-navy);
+  margin-top: 40px;
+  margin-bottom: 14px;
+}
+
+.legal-content-inner a {
+  color: var(--color-navy);
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive — Legal Content
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .legal-content {
+    padding-top: 56px;
+    padding-bottom: 64px;
+  }
+
+  .legal-heading {
+    font-size: 21px;
+    margin-top: 32px;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Site Footer
    -------------------------------------------------------------------------- */
 .site-footer {
