@@ -713,13 +713,13 @@ h6 {
 .services {
   width: 100%;
   background: var(--color-off-white);
-  padding-top: 68px;
-  padding-bottom: 68px;
+  padding-top: 48px;
+  padding-bottom: 48px;
 }
 
 .services-header {
   text-align: center;
-  margin-bottom: 44px;
+  margin-bottom: 32px;
 }
 
 .services-header .section-label {
@@ -777,6 +777,17 @@ h6 {
    Responsive — Services
    -------------------------------------------------------------------------- */
 @media (max-width: 1024px) {
+  /* Tablet keeps the original, more generous spacing — the reduced padding
+     on .services/.services-header above is a desktop-only (>1024px) change. */
+  .services {
+    padding-top: 68px;
+    padding-bottom: 68px;
+  }
+
+  .services-header {
+    margin-bottom: 44px;
+  }
+
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
   }
