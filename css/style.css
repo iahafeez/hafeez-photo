@@ -1296,6 +1296,63 @@ h6 {
 }
 
 /* --------------------------------------------------------------------------
+   Explore More Work — gallery cross-links, sits above the Contact CTA on
+   the four gallery pages (expos/conferences/private-events/headshots)
+   -------------------------------------------------------------------------- */
+.explore-more {
+  width: 100%;
+  background: var(--color-navy);
+  text-align: center;
+  padding-top: 56px;
+  padding-bottom: 56px;
+}
+
+.explore-more .section-label {
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.explore-more-title {
+  font-size: 34px;
+  color: var(--color-white);
+  margin-bottom: 28px;
+}
+
+.explore-more-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive — Explore More Work
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .explore-more {
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+
+  .explore-more-title {
+    font-size: 26px;
+    margin-bottom: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .explore-more-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .explore-more-links .btn-hero {
+    width: 100%;
+  }
+}
+
+/* --------------------------------------------------------------------------
    Site Footer
    -------------------------------------------------------------------------- */
 .site-footer {
@@ -1763,8 +1820,11 @@ body.expos-page .photo-gallery {
   color: var(--color-navy);
 }
 
+.required-marker {
+  color: #b3261e;
+}
+
 .form-group input,
-.form-group select,
 .form-group textarea {
   width: 100%;
   padding: 14px 16px;
@@ -1777,7 +1837,6 @@ body.expos-page .photo-gallery {
 }
 
 .form-group input:focus,
-.form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--color-navy);
   outline: none;
@@ -1785,6 +1844,121 @@ body.expos-page .photo-gallery {
 
 .form-group textarea {
   resize: vertical;
+}
+
+.form-group input.is-invalid,
+.form-group textarea.is-invalid {
+  border-color: #b3261e;
+}
+
+.field-error {
+  display: none;
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: #b3261e;
+}
+
+.field-error.is-visible {
+  display: block;
+}
+
+/* The date field's native calendar icon is the only clickable part of the
+   control besides the text itself, so it gets its own pointer cursor. */
+.form-group input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   Custom Select — Event Type dropdown on the contact form
+   -------------------------------------------------------------------------- */
+.custom-select {
+  position: relative;
+}
+
+.custom-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #d8d5cc;
+  background: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-navy);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.custom-select-trigger:focus,
+.custom-select-trigger.is-open {
+  border-color: var(--color-navy);
+  outline: none;
+}
+
+.custom-select-trigger.is-invalid {
+  border-color: #b3261e;
+}
+
+.custom-select-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.custom-select-value.is-placeholder {
+  color: #8a8a8a;
+}
+
+.custom-select-arrow {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-left: 12px;
+  color: var(--color-navy);
+  transition: transform 0.2s ease;
+}
+
+.custom-select-trigger.is-open .custom-select-arrow {
+  transform: rotate(180deg);
+}
+
+.custom-select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin-top: 4px;
+  padding: 8px 0;
+  background: var(--color-white);
+  border: 1px solid #d8d5cc;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.custom-select-options[hidden] {
+  display: none;
+}
+
+.custom-select-options li {
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-navy);
+  cursor: pointer;
+}
+
+.custom-select-options li:hover,
+.custom-select-options li.is-highlighted {
+  background: var(--color-off-white);
+}
+
+.custom-select-options li[aria-selected="true"] {
+  font-weight: 600;
 }
 
 .btn-submit {

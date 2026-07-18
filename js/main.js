@@ -239,3 +239,200 @@ if (lightboxEnabledPages.some((cls) => document.body.classList.contains(cls))) {
     }, { passive: true });
   }
 }
+
+// Custom select dropdowns (e.g. the contact form's Event Type field) — built
+// from scratch so the open state can be styled to match the site, while a
+// hidden input still carries the value Netlify Forms detects and submits.
+document.querySelectorAll('.custom-select').forEach((customSelect) => {
+  const trigger = customSelect.querySelector('.custom-select-trigger');
+  const valueEl = customSelect.querySelector('.custom-select-value');
+  const listbox = customSelect.querySelector('.custom-select-options');
+  const hiddenInput = customSelect.querySelector('input[type="hidden"]');
+  const options = Array.from(customSelect.querySelectorAll('[role="option"]'));
+
+  let highlightedIndex = -1;
+
+  function isOpen() {
+    return !listbox.hidden;
+  }
+
+  function highlightOption(index) {
+    options.forEach((opt) => opt.classList.remove('is-highlighted'));
+    highlightedIndex = index;
+    if (index >= 0 && index < options.length) {
+      options[index].classList.add('is-highlighted');
+      options[index].scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  function openListbox() {
+    listbox.hidden = false;
+    trigger.setAttribute('aria-expanded', 'true');
+    trigger.classList.add('is-open');
+    const selectedIndex = options.findIndex((opt) => opt.getAttribute('aria-selected') === 'true');
+    highlightOption(selectedIndex >= 0 ? selectedIndex : 0);
+  }
+
+  function closeListbox() {
+    listbox.hidden = true;
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.classList.remove('is-open');
+    highlightOption(-1);
+  }
+
+  function selectOption(option) {
+    options.forEach((opt) => opt.setAttribute('aria-selected', 'false'));
+    option.setAttribute('aria-selected', 'true');
+    valueEl.textContent = option.textContent;
+    valueEl.classList.remove('is-placeholder');
+    hiddenInput.value = option.getAttribute('data-value');
+    trigger.classList.remove('is-invalid');
+    trigger.removeAttribute('aria-invalid');
+
+    const errorEl = customSelect.closest('.form-group').querySelector('.field-error');
+    if (errorEl) {
+      errorEl.textContent = '';
+      errorEl.classList.remove('is-visible');
+    }
+  }
+
+  trigger.addEventListener('click', () => {
+    if (isOpen()) {
+      closeListbox();
+    } else {
+      openListbox();
+    }
+  });
+
+  trigger.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      if (!isOpen()) {
+        openListbox();
+      } else {
+        const delta = event.key === 'ArrowDown' ? 1 : -1;
+        highlightOption((highlightedIndex + delta + options.length) % options.length);
+      }
+    } else if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      if (isOpen()) {
+        if (highlightedIndex >= 0) {
+          selectOption(options[highlightedIndex]);
+        }
+        closeListbox();
+      } else {
+        openListbox();
+      }
+    } else if (event.key === 'Escape' && isOpen()) {
+      event.preventDefault();
+      closeListbox();
+    }
+  });
+
+  options.forEach((option, index) => {
+    option.addEventListener('click', () => {
+      selectOption(option);
+      closeListbox();
+      trigger.focus();
+    });
+
+    option.addEventListener('mouseenter', () => {
+      highlightOption(index);
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (isOpen() && !customSelect.contains(event.target)) {
+      closeListbox();
+    }
+  });
+});
+
+// Custom validation for the contact form. The form carries novalidate so the
+// browser's stop-at-the-first-invalid-field behavior is fully replaced: every
+// required field is checked at once, and each empty one gets its own inline
+// message rather than a single native validation bubble.
+const contactForm = document.querySelector('.contact-form');
+
+if (contactForm) {
+  const REQUIRED_FIELD_ERROR = 'This field is required.';
+
+  // One entry per .form-group that has a required field — the Event Type
+  // group is a custom-select (value lives on a hidden input, error styling
+  // applies to the visible trigger button), every other group is a plain
+  // input/textarea acting as its own value holder and error target.
+  function getFieldConfigs() {
+    const configs = [];
+
+    contactForm.querySelectorAll('.form-group').forEach((group) => {
+      const errorEl = group.querySelector('.field-error');
+      if (!errorEl) return;
+
+      const customSelect = group.querySelector('.custom-select');
+      if (customSelect) {
+        const hiddenInput = customSelect.querySelector('input[type="hidden"]');
+        if (!hiddenInput || !hiddenInput.required) return;
+        configs.push({
+          errorEl,
+          invalidTarget: customSelect.querySelector('.custom-select-trigger'),
+          isEmpty: () => !hiddenInput.value,
+        });
+        return;
+      }
+
+      const field = group.querySelector('input[required], textarea[required]');
+      if (!field) return;
+      configs.push({
+        errorEl,
+        invalidTarget: field,
+        isEmpty: () => !field.value.trim(),
+      });
+    });
+
+    return configs;
+  }
+
+  function showFieldError(config) {
+    config.errorEl.textContent = REQUIRED_FIELD_ERROR;
+    config.errorEl.classList.add('is-visible');
+    config.invalidTarget.classList.add('is-invalid');
+  }
+
+  function clearFieldError(config) {
+    config.errorEl.textContent = '';
+    config.errorEl.classList.remove('is-visible');
+    config.invalidTarget.classList.remove('is-invalid');
+  }
+
+  contactForm.addEventListener('submit', (event) => {
+    let firstInvalidTarget = null;
+
+    getFieldConfigs().forEach((config) => {
+      if (config.isEmpty()) {
+        showFieldError(config);
+        if (!firstInvalidTarget) firstInvalidTarget = config.invalidTarget;
+      } else {
+        clearFieldError(config);
+      }
+    });
+
+    if (firstInvalidTarget) {
+      event.preventDefault();
+      firstInvalidTarget.focus();
+    }
+  });
+
+  // Clear a field's error as soon as the visitor fixes it, instead of making
+  // them wait for the next submit attempt to see it disappear.
+  contactForm.querySelectorAll('input[required], textarea[required]').forEach((field) => {
+    field.addEventListener('input', () => {
+      const group = field.closest('.form-group');
+      const errorEl = group ? group.querySelector('.field-error') : null;
+      if (errorEl && field.value.trim()) {
+        errorEl.textContent = '';
+        errorEl.classList.remove('is-visible');
+        field.classList.remove('is-invalid');
+      }
+    });
+  });
+}
