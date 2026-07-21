@@ -1979,6 +1979,56 @@ body.expos-page .photo-gallery {
   background: #24384d;
 }
 
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* --------------------------------------------------------------------------
+   Contact Form — AJAX submit states (inline error, success message)
+   -------------------------------------------------------------------------- */
+.contact-form-fields {
+  transition: opacity 0.3s ease;
+}
+
+.contact-form-fields.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-submit-error {
+  margin-bottom: 24px;
+  padding: 14px 16px;
+  background: #fdf0ef;
+  border: 1px solid #b3261e;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #b3261e;
+}
+
+.contact-form-success {
+  padding: 48px 0;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.contact-form-success.is-visible {
+  opacity: 1;
+}
+
+.contact-form-success-title {
+  font-size: 34px;
+  color: var(--color-navy);
+  margin-bottom: 12px;
+}
+
+.contact-form-success-text {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: #6b6b6b;
+}
+
 /* --------------------------------------------------------------------------
    Contact Info
    -------------------------------------------------------------------------- */

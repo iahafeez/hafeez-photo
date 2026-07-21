@@ -404,7 +404,51 @@ if (contactForm) {
     config.invalidTarget.classList.remove('is-invalid');
   }
 
+  // AJAX submission — Netlify Forms accepts the same urlencoded body a normal
+  // form POST would send, so submitting it via fetch keeps the visitor on
+  // the page instead of navigating to Netlify's default success page.
+  const submitButton = contactForm.querySelector('.btn-submit');
+  const submitErrorEl = contactForm.querySelector('.form-submit-error');
+  const fieldsWrapper = contactForm.querySelector('.contact-form-fields');
+  const successEl = contactForm.querySelector('.contact-form-success');
+  const SUBMIT_ERROR_MESSAGE = 'Something went wrong, please try again or email us directly.';
+  const FADE_DURATION_MS = 300;
+
+  function submitContactForm() {
+    submitButton.disabled = true;
+    submitErrorEl.hidden = true;
+    submitErrorEl.textContent = '';
+
+    const body = new URLSearchParams(new FormData(contactForm)).toString();
+
+    fetch(window.location.pathname, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body,
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error(`Form submission failed with status ${response.status}`);
+
+        fieldsWrapper.classList.add('is-hidden');
+        window.setTimeout(() => {
+          fieldsWrapper.hidden = true;
+          successEl.hidden = false;
+          // Force a reflow so the opacity transition below plays from 0
+          // instead of jumping straight to its end state.
+          void successEl.offsetWidth;
+          successEl.classList.add('is-visible');
+        }, FADE_DURATION_MS);
+      })
+      .catch(() => {
+        submitButton.disabled = false;
+        submitErrorEl.textContent = SUBMIT_ERROR_MESSAGE;
+        submitErrorEl.hidden = false;
+      });
+  }
+
   contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
     let firstInvalidTarget = null;
 
     getFieldConfigs().forEach((config) => {
@@ -417,9 +461,11 @@ if (contactForm) {
     });
 
     if (firstInvalidTarget) {
-      event.preventDefault();
       firstInvalidTarget.focus();
+      return;
     }
+
+    submitContactForm();
   });
 
   // Clear a field's error as soon as the visitor fixes it, instead of making
